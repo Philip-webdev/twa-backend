@@ -14,7 +14,7 @@ const corsOptions = {
 app.use(cors(corsOptions));
 
 // Example API endpoint
-app.get('/orderly', (req, res) => {
+app.get('/telegram-webApp/orderly', (req, res) => {
     res.json({ message: 'Hello from Express!' });
 });
 
