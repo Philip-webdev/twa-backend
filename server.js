@@ -6,7 +6,7 @@ const PORT = process.env.PORT || 5000;
 
 // Configure CORS to allow requests from your frontend domain
 const corsOptions = {
-    origin: 'https://philip-webdev.github.io/telegram-webApp/', // Replace with your GitHub Pages URL
+    origin: 'https://philip-webdev.github.io', // Replace with your GitHub Pages URL
     methods: ['GET', 'POST'],
     allowedHeaders: ['Content-Type'],
 };
