@@ -8,7 +8,7 @@ const PORT = process.env.PORT || 5000;
 const corsOptions = {
     origin: 'https://philip-webdev.github.io', // Replace with your GitHub Pages URL
     methods: ['GET', 'POST'],
-    allowedHeaders: [{'Content-Type':'application/json'}],
+    allowedHeaders: ['Content-Type'],
 };
 
 app.use(cors(corsOptions));
