@@ -15,8 +15,11 @@ app.use(cors(corsOptions));
 
 // Example API endpoint
 app.get('/telegram-webApp/orderly', (req, res) => {
-    const rawData = [product_data_1, product_data_2, product_data_3, product_data_4,product_data_5,product_data_6,product_data_7, product_data_8, product_data_9 ];
-    res.json(rawData);});
+   
+    //const rawData = [product_data_1, product_data_2, product_data_3, product_data_4,product_data_5,product_data_6,product_data_7, product_data_8, product_data_9 ];
+   const rawData = 'this is it';
+       res.json(rawData);});
+
 
 app.listen(PORT, () => {
     console.log(`Server running on http://localhost:${PORT}`);
