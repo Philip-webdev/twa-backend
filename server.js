@@ -16,8 +16,8 @@ const corsOptions = {
 app.use(cors(corsOptions));
 
 // Example API endpoint
-app.get('/telegram-webApp/orderly', async (req, res) => {
-    const response = await axios.get('https://twa-backend-g83o.onrender.com/telegram-webApp/orderly');
+app.get('/telegram-webApp/orderly',  (req, res) => {
+    const response =  axios.get('https://twa-backend-g83o.onrender.com/telegram-webApp/orderly');
     console.log(response.data); }
 );
     
