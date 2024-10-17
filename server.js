@@ -23,7 +23,7 @@ app.get('/telegram-webApp/orderly',  (req, res) => {
     console.log(response.data); }
 );
     
-app.post('/telegram-webApp/profile', async(req, res)=>{
+app.post('/profile', async(req, res)=>{
 const freshPerson = new profile(req.body);
 
 freshPerson.save()
