@@ -2,8 +2,8 @@ const express = require('express');
 const cors = require('cors');
 const axios = require('axios');
 const mongoose = require('mongoose');
-const profile = require('./models/profiling');
-const cookie = require('./models/cookie');
+const Profile = require('./models/profiling');
+const Cookie = require('./models/cookie');
 const app = express();
 const PORT = process.env.PORT || 5000;
 const dbURI = 'mongodb+srv://phil_web:test123@cluster0.wsfgf9o.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0'
@@ -24,7 +24,7 @@ app.get('/telegram-webApp/orderly',  (req, res) => {
 );
     
 app.post('https://twa-backend-g83o.onrender.com/profile', async(req, res)=>{
-const freshPerson = new profile(req.body);
+const freshPerson = new Profile(req.body);
 
 freshPerson.save()
 .then((result)=>{res.json(result)})

@@ -17,5 +17,5 @@ const blogSchema = new Schema({
   },
     { timestamps: true});
 
-    const profile =  mongoose.model('Profile', blogSchema);
+    const Profile =  mongoose.model('Profile', blogSchema);
     module.exports = Profile;
