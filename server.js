@@ -28,7 +28,7 @@ app.get('/profile', (req, res)=> {const info = res.json({message:'hi'});
 console.log(info)}
 )
     
-app.post('/profiler', (req, res)=>{
+app.post('/profile', (req, res)=>{
 const freshPerson = new Profile(req.body);
 
 freshPerson.save()
