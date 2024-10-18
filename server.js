@@ -24,11 +24,11 @@ app.get('/telegram-webApp/orderly',  (req, res) => {
     console.log(res.json(result)); }
 );
 
-app.get('/profile', (req, res)=> {const info = res.json({message:'hi'});
+app.get('#/profile/profile', (req, res)=> {const info = res.json({message:'hi'});
 console.log(info)}
 )
     
-app.post('/profile', (req, res)=>{
+app.post('#/profile/profile', (req, res)=>{
 const freshPerson = new Profile(req.body);
 
 freshPerson.save()
