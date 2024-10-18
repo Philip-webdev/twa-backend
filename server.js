@@ -23,6 +23,8 @@ app.get('/telegram-webApp/orderly',  (req, res) => {
    // const response =  axios.get('https://twa-backend-g83o.onrender.com/telegram-webApp/orderly');
     console.log(res.json(result)); }
 );
+
+app.get('/profile', (req, res)=> res.json({message:'hi'}))
     
 app.post('/profiler', (req, res)=>{
 const freshPerson = new Profile(req.body);
