@@ -41,7 +41,7 @@ freshPerson.save()
 
 app.get('/profiler', (req, res)=>{
     res.json({result})
-    console.log(result);
+    console.log('hi');
 })
 
 app.listen(PORT, () => {
