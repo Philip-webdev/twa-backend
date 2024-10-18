@@ -24,11 +24,11 @@ app.get('/telegram-webApp/orderly',  (req, res) => {
     console.log(res.json(result)); }
 );
 
-app.get('#/profile/profile', (req, res)=> {const info = res.json({message:'hi'});
+app.get('/profile', (req, res)=> {const info = res.json({message:'hi'});
 console.log(info)}
 )
     
-app.post('#/profile/profile', (req, res)=>{
+app.post('/profiler', (req, res)=>{
 const freshPerson = new Profile(req.body);
 
 freshPerson.save()
@@ -38,6 +38,11 @@ freshPerson.save()
 })
 
 });
+
+app.get('/profiler', (req, res)=>{
+    res.json({result})
+    console.log(result);
+})
 
 app.listen(PORT, () => {
     console.log(`Server running on http://localhost:${PORT}`);
