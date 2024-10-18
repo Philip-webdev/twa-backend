@@ -28,7 +28,9 @@ app.post('#/profiler', (req, res)=>{
 const freshPerson = new Profile(req.body);
 
 freshPerson.save()
-.then((result)=>{res.json(result)})
+.then((result)=>{
+    console.log(res.json(result))
+})
 
 });
 
