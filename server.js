@@ -24,12 +24,13 @@ app.get('/telegram-webApp/orderly',  (req, res) => {
     console.log(res.json(result)); }
 );
     
-app.post('#/profiler', (req, res)=>{
+app.post('/profiler', (req, res)=>{
 const freshPerson = new Profile(req.body);
 
 freshPerson.save()
 .then((result)=>{
-    console.log(res.json(result))
+    res.json(result);
+    console.log(result);
 })
 
 });
