@@ -16,7 +16,7 @@ const corsOptions = {
 };
 
 app.use(cors(corsOptions));
-//app.use(express.json());
+app.use(express.json());
 
 app.get('/telegram-webApp/orderly',  (req, res) => {
    // const response =  axios.get('https://twa-backend-g83o.onrender.com/telegram-webApp/orderly');
@@ -34,7 +34,7 @@ const freshPerson = new Profile(req.body);
 freshPerson.save()
 .then((result)=>{
     res.json(result);
-    console.log({Profile: result});
+    console.log({profiles: result});
 })
 
 });
