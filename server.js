@@ -8,7 +8,6 @@ const app = express();
 const PORT = process.env.PORT || 5000;
 const dbURI = 'mongodb+srv://Twa_admin:twa_project1@twa-cluster.z9twx.mongodb.net/?retryWrites=true&w=majority&appName=Twa-Cluster'
 mongoose.connect(dbURI);
-app.use(express.urlencoded({extended:true}));
 
 const corsOptions = {
     origin: 'https://philip-webdev.github.io', 
