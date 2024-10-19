@@ -6,7 +6,7 @@ const Profile = require('./models/profiling');
 const Cookie = require('./models/cookie');
 const app = express();
 const PORT = process.env.PORT || 5000;
-const dbURI = 'mongodb+srv://phil_web:test123@cluster0.wsfgf9o.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0'
+const dbURI = 'mongodb+srv://Twa_admin:twa_project1@twa-cluster.z9twx.mongodb.net/?retryWrites=true&w=majority&appName=Twa-Cluster'
 mongoose.connect(dbURI);
 app.use(express.urlencoded({extended:true}));
 
@@ -27,7 +27,7 @@ app.get('/telegram-webApp/orderly',  (req, res) => {
 app.get('/profile', (req, res)=> {const info = res.json({message:'hi'});
 console.log(info)}
 ); 
- 
+
 app.post('/profiler', (req, res)=>{
 const freshPerson = new Profile(req.body);
 
