@@ -10,13 +10,13 @@ const dbURI = 'mongodb+srv://Twa_admin:twa_project1@twa-cluster.z9twx.mongodb.ne
 mongoose.connect(dbURI);
 
 const corsOptions = {
-    origin: ['https://philip-webdev.github.io','https://twa-backend-g83o.onrender.com'],
+    origin: 'https://philip-webdev.github.io',
     methods: ['GET', 'POST'],
     allowedHeaders: ['Content-Type'],
 };
 
 app.use(cors(corsOptions));
-app.use(express.json());
+//app.use(express.json());
 
 app.get('/telegram-webApp/orderly',  (req, res) => {
    // const response =  axios.get('https://twa-backend-g83o.onrender.com/telegram-webApp/orderly');
