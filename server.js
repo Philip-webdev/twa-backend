@@ -26,8 +26,9 @@ app.get('/telegram-webApp/orderly',  (req, res) => {
 
 app.get('/profile', (req, res)=> {const info = res.json({message:'hi'});
 console.log(info)}
-);  
-/*app.post('/profiler', (req, res)=>{
+); 
+ 
+app.post('/profiler', (req, res)=>{
 const freshPerson = new Profile(req.body);
 
 freshPerson.save()
@@ -36,7 +37,7 @@ freshPerson.save()
     console.log(result);
 })
 
-}); */
+});
 
 app.get('/profiler', (req, res)=>{
     try{
