@@ -10,7 +10,7 @@ const dbURI = 'mongodb+srv://Twa_admin:twa_project1@twa-cluster.z9twx.mongodb.ne
 mongoose.connect(dbURI);
 
 const corsOptions = {
-    origin: 'https://philip-webdev.github.io', 
+    origin: ['https://philip-webdev.github.io','https://twa-backend-g83o.onrender.com'],
     methods: ['GET', 'POST'],
     allowedHeaders: ['Content-Type'],
 };
