@@ -16,7 +16,7 @@ const corsOptions = {
 };
 
 app.use(cors(corsOptions));
-
+app.use(express.json());
 
 app.get('/telegram-webApp/orderly',  (req, res) => {
    // const response =  axios.get('https://twa-backend-g83o.onrender.com/telegram-webApp/orderly');
@@ -28,27 +28,26 @@ console.log(info)}
 ); 
 
 app.post('/profiler', (req, res)=>{
+    console.log('passed')
 const freshPerson = new Profile(req.body);
 
 freshPerson.save()
 .then((result)=>{
     res.json(result);
-    console.log(result);
+    console.log({Profile: result});
 })
 
 });
 
-app.get('/profiler', (req, res)=>{
-    try{
-    res.json({result})
-    console.log({result});
+app.get('/profiler',  (req, res) => {
+    try {
+        const results = Profile.find(); // Fetch all profiles
+        res.json(results);
+    } catch (error) {
+        console.error('Error fetching profiles:', error);
+       // res.status(500).json({ error: 'Internal Server Error' });
     }
-    catch{
-        (err)=>{
-            console.log(err);
-        }
-    }
-})
+});
 
 app.listen(PORT, () => {
     console.log(`Server running on http://localhost:${PORT}`);
