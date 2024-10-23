@@ -23,8 +23,12 @@ app.get('/telegram-webApp/orderly',  (req, res) => {
     console.log(res.json(result)); }
 );
 
-app.get('/profile', (req, res)=> {const info = res.json({message:'hi'});
-console.log(info)}
+app.get('/profile', (req, res)=> {
+    
+  const info =  axios.get('');
+    const infoFrontend = res.json(info);
+console.log(infoFrontend);
+}
 ); 
 
 app.post('/profiler', (req, res)=>{
