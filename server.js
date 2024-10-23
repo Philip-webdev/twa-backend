@@ -7,7 +7,10 @@ const Cookie = require('./models/cookie');
 const app = express();
 const PORT = process.env.PORT || 5000;
 const dbURI = 'mongodb+srv://Twa_admin:twa_project1@twa-cluster.z9twx.mongodb.net/?retryWrites=true&w=majority&appName=Twa-Cluster'
-mongoose.connect(dbURI);
+mongoose.connect(dbURI).then(app.listen(PORT, () => {
+    console.log(`Server running on http://localhost:${PORT}`);
+}))
+.catch((err)=>{console.log(err)});
 
 const corsOptions = {
     origin: 'https://philip-webdev.github.io',
@@ -28,27 +31,23 @@ console.log(info)}
 ); 
 
 app.post('/profiler', (req, res)=>{
-    console.log('passed')
+
 const freshPerson = new Profile(req.body);
 
 freshPerson.save()
 .then((result)=>{
     res.json(result);
-    console.log({profiles: result});
+   // console.log({profiles: result});
 })
 
 });
 
 app.get('/profiler',  (req, res) => {
-    try {
-        const results = Profile.find(); // Fetch all profiles
-        res.json(results);
-    } catch (error) {
-        console.error('Error fetching profiles:', error);
-       // res.status(500).json({ error: 'Internal Server Error' });
-    }
-});
 
-app.listen(PORT, () => {
-    console.log(`Server running on http://localhost:${PORT}`);
-});
+       const results = Profile.find(); // Fetch all profiles
+    results.then( res.json(results))
+   
+     .catch ((error)=> {
+        console.error('Error fetching profiles:', error);
+       res.status(500).json({ error: 'Internal Server Error' });
+})});
