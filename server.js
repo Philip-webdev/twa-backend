@@ -25,7 +25,7 @@ app.get('/telegram-webApp/orderly',  (req, res) => {
 
 app.get('/profile', (req, res)=> {
     
-  const info =  axios.get('');
+  const info =  axios.get('https://twa-backend-g83o.onrender.com/profiler');
     const infoFrontend = res.json(info);
 console.log(infoFrontend);
 }
