@@ -15,15 +15,15 @@ mongoose.connect(dbURI).then(app.listen(PORT, () => {
 const corsOptions = {
     origin: 'https://philip-webdev.github.io',
     methods: ['GET', 'POST'],
-    allowedHeaders: ['Content-Type'],
+    allowedHeaders: ['Content-Type', 'application/json'],
 };
 
 app.use(cors(corsOptions));
-app.use(express.json());
+
 
 app.get('/telegram-webApp/orderly',  (req, res) => {
    // const response =  axios.get('https://twa-backend-g83o.onrender.com/telegram-webApp/orderly');
-    console.log(res.json(result)); }
+    console.log(res.json({message:'Welcome to my channel'})); }
 );
 
 app.get('/profile', (req, res)=> {
