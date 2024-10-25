@@ -15,7 +15,7 @@ mongoose.connect(dbURI).then(app.listen(PORT, () => {
 const corsOptions = {
     origin: 'https://philip-webdev.github.io',
     methods: ['GET', 'POST'],
-    allowedHeaders: ['Content-Type', 'application/json'],
+    allowedHeaders: ['Content-Type'],
 };
 
 app.use(cors(corsOptions));
