@@ -8,7 +8,7 @@ const PORT = process.env.PORT || 5000;
 const dbURI = 'mongodb+srv://Twa_admin:twa_project1@twa-cluster.z9twx.mongodb.net/?retryWrites=true&w=majority&appName=Twa-Cluster';
 
 const corsOptions = {
-    origin: 'https://philip-webdev.github.io',
+    origin: 'https://philip-webdev.github.io/telegram-webApp/',
     methods: ['GET', 'POST'],
     allowedHeaders: ['Content-Type'],
 };
@@ -26,13 +26,13 @@ mongoose.connect(dbURI)
         console.error('Database connection error:', err);
     });
 
-app.get('/telegram-webApp/orderly', (req, res) => {
+app.get('/orderly', (req, res) => {
     res.json({ message: 'Welcome to my channel' });
 });
 
 app.get('/profile', async (req, res) => {
     try {
-        const info = await axios.get('https://twa-backend-g83o.onrender.com/profiler');
+        const info = await axios.get('https://philip-webdev.github.io/telegram-webApp/profiler');
         res.json(info.data); // Return the actual data
     } catch (error) {
         console.error('Error fetching profile:', error);
@@ -51,7 +51,7 @@ app.post('/profiler', async (req, res) => {
     }
 });
 
-app.get('/profiler', async (req, res) => {
+app.get('/profiled', async (req, res) => {
     try {
         const results = await Profile.find(); // Fetch all profiles
         res.json(results);
