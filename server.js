@@ -5,7 +5,15 @@ const mongoose = require('mongoose');
 const Profile = require('./models/profiling');
 const app = express();
 const dbURI = 'mongodb+srv://Twa_admin:twa_project1@twa-cluster.z9twx.mongodb.net/?retryWrites=true&w=majority&appName=Twa-Cluster';
-
+mongoose.connect(dbURI)
+    .then((result) => {
+        app.listen(4000, () => {
+            console.log(`Server running on 4000}`);
+        });
+    })
+    .catch((err) => {
+        console.error('Database connection error:', err);
+    });
 const corsOptions = {
     origin: ['https://philip-webdev.github.io/telegram-webApp', 'https://twa-backend-g83o.onrender.com'],
     methods: ['GET', 'POST'],
@@ -15,15 +23,6 @@ const corsOptions = {
 app.use(cors(corsOptions));
 app.use(express.json()); // Make sure to parse JSON request bodies
 
-mongoose.connect(dbURI)
-    .then(() => {
-        app.listen(4000, () => {
-            console.log(`Server running on http://localhost: 4000}`);
-        });
-    })
-    .catch((err) => {
-        console.error('Database connection error:', err);
-    });
 
 app.get('/orderly', (req, res) => {
     res.json({ message: 'Welcome to my channel' });
