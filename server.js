@@ -8,7 +8,7 @@ const PORT = process.env.PORT || 5000;
 const dbURI = 'mongodb+srv://Twa_admin:twa_project1@twa-cluster.z9twx.mongodb.net/?retryWrites=true&w=majority&appName=Twa-Cluster';
 
 const corsOptions = {
-    origin: 'https://philip-webdev.github.io/telegram-webApp',
+    origin: ['https://philip-webdev.github.io/telegram-webApp', 'https://twa-backend-g83o.onrender.com'],
     methods: ['GET', 'POST'],
     allowedHeaders: ['Content-Type'],
 };
@@ -59,4 +59,4 @@ app.get('/profiled', async (req, res) => {
         console.error('Error fetching profiles:', error);
         res.status(500).json({ error: 'Internal Server Error' });
     }
-});
+}); 
