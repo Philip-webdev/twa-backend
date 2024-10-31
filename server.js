@@ -4,7 +4,6 @@ const axios = require('axios');
 const mongoose = require('mongoose');
 const Profile = require('./models/profiling');
 const app = express();
-const PORT = process.env.PORT || 1000;
 const dbURI = 'mongodb+srv://Twa_admin:twa_project1@twa-cluster.z9twx.mongodb.net/?retryWrites=true&w=majority&appName=Twa-Cluster';
 
 const corsOptions = {
@@ -18,8 +17,8 @@ app.use(express.json()); // Make sure to parse JSON request bodies
 
 mongoose.connect(dbURI)
     .then(() => {
-        app.listen(PORT, () => {
-            console.log(`Server running on http://localhost:${PORT}`);
+        app.listen(4000, () => {
+            console.log(`Server running on http://localhost: 4000}`);
         });
     })
     .catch((err) => {
