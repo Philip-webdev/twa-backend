@@ -4,7 +4,7 @@ const axios = require('axios');
 const mongoose = require('mongoose');
 const Profile = require('./models/profiling');
 const app = express();
-const PORT = process.env.PORT || 5000;
+const PORT = process.env.PORT || 1000;
 const dbURI = 'mongodb+srv://Twa_admin:twa_project1@twa-cluster.z9twx.mongodb.net/?retryWrites=true&w=majority&appName=Twa-Cluster';
 
 const corsOptions = {
