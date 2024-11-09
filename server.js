@@ -15,8 +15,9 @@ mongoose.connect(dbURI)
         console.error('Database connection error:', err);
     });
 const corsOptions = {
-    origin: ['https://philip-webdev.github.io/telegram-webApp', 'https://twa-backend-g83o.onrender.com'],
+    origin: ['https://philip-webdev.github.io'],
     methods: ['GET', 'POST'],
+    credentials: 'true',
     allowedHeaders: ['Content-Type'],
 };
 
