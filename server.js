@@ -38,7 +38,6 @@ app.get('/profile', async (req, res) => {
         res.status(500).json({ error: 'Internal Server Error' });
     }
 });
-
 app.post('/profiler', async (req, res) => {
     try {
         const freshPerson = new Profile(req.body);
