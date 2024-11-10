@@ -4,10 +4,11 @@ const axios = require('axios');
 const mongoose = require('mongoose');
 const Profile = require('./models/profiling');
 const app = express();
+const port = process.env.PORT || 1000;
 const dbURI = 'mongodb+srv://philisobank21:twa123@cluster1.cege3.mongodb.net/?retryWrites=true&w=majority&appName=Cluster1';
 mongoose.connect(dbURI)
     .then((result) => {
-        app.listen(1000, () => {
+        app.listen(port, () => {
             console.log(`Server running on 1000`);
         });
     })
