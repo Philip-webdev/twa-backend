@@ -4,10 +4,10 @@ const axios = require('axios');
 const mongoose = require('mongoose');
 const Profile = require('./models/profiling');
 const app = express();
-const dbURI = 'mongodb+srv://Twa_admin:twa_project1@twa-cluster.z9twx.mongodb.net/?retryWrites=true&w=majority&appName=Twa-Cluster';
+const dbURI = 'mongodb+srv://philisobank21:twa123@cluster1.cege3.mongodb.net/?retryWrites=true&w=majority&appName=Cluster1';
 mongoose.connect(dbURI)
     .then((result) => {
-        app.listen(4000, () => {
+        app.listen(1000, () => {
             console.log(`Server running on 4000`);
         });
     })
