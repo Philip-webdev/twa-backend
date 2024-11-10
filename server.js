@@ -8,7 +8,7 @@ const dbURI = 'mongodb+srv://Twa_admin:twa_project1@twa-cluster.z9twx.mongodb.ne
 mongoose.connect(dbURI)
     .then((result) => {
         app.listen(4000, () => {
-            console.log(`Server running on 4000}`);
+            console.log(`Server running on 4000`);
         });
     })
     .catch((err) => {
