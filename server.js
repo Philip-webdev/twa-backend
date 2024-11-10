@@ -20,9 +20,9 @@ const corsOptions = {
     credentials: 'true',
     allowedHeaders: ['Content-Type'],
 };
-
 app.use(cors(corsOptions));
 app.use(express.json()); // Make sure to parse JSON request bodies
+
 
 
 app.get('/orderly', (req, res) => {
