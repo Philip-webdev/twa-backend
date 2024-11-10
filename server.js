@@ -8,7 +8,7 @@ const dbURI = 'mongodb+srv://philisobank21:twa123@cluster1.cege3.mongodb.net/?re
 mongoose.connect(dbURI)
     .then((result) => {
         app.listen(1000, () => {
-            console.log(`Server running on 4000`);
+            console.log(`Server running on 1000`);
         });
     })
     .catch((err) => {
@@ -48,7 +48,6 @@ app.post('/profiler', async (req, res) => {
         res.status(500).json({ error: 'Internal Server Error' });
     }
 });
-
 app.get('/profiled', async (req, res) => {
     try {
         const results = await Profile.find(); // Fetch all profiles
