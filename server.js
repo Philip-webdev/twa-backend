@@ -24,7 +24,9 @@ const corsOptions = {
 app.use(cors(corsOptions));
 app.use(express.json()); // Make sure to parse JSON request bodies
 
-
+app.get('/product', (req, res) => {
+    res.json({ message: 'testing axios' });
+});
 
 app.get('/orderly', (req, res) => {
     res.json({ message: 'Welcome to my channel' });
