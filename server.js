@@ -45,7 +45,7 @@ app.get('/profile', async (req, res) => {
 });
 app.post('/profiler', async (req, res) => {
     try {
-        console.log(req.body)
+      
         const freshPerson = new Profile(req.body);
         const result = await freshPerson.save();
         res.json(result);
