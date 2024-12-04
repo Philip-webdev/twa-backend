@@ -1,5 +1,6 @@
 const express = require('express');
 const cors = require('cors');
+const fetch = require('node-fetch');
 const axios = require('axios');
 const mongoose = require('mongoose');
 const Profile = require('./models/profiling');
@@ -16,7 +17,7 @@ mongoose.connect(dbURI)
         console.error('Database connection error:', err);
     });
 const corsOptions = {
-    origin: ['https://philip-webdev.github.io'],
+    origin: ['https://philip-webdev.github.io', 'localhost:5173'],
     methods: ['GET', 'POST'],
     credentials: 'true',
     allowedHeaders: ['Content-Type'],
@@ -33,7 +34,18 @@ app.get('/product', (req, res) => {
 app.get('/orderly', (req, res) => {
     res.json({ message: 'Welcome to my channel' });
 });
+app.get('/api/cryptocurrency', async (req, res) => {
+    const url = `https://sandbox-api.coinmarketcap.com/v1/cryptocurrency/listings/latest?CMC_PRO_API_KEY=4a218c19-80f5-4eb9-828e-f3e4dd8b05f1`;
+    try {
+        const response = await fetch(url);
+        const data = await response.json();
+       const result = res.json(data);
 
+    console.log(result);
+    } catch (error) {
+        res.status(500).send(error.toString());
+    }
+});
 app.get('/profile', async (req, res) => {
     try {
         const info = await axios.get('https://philip-webdev.github.io/telegram-webApp/profiler');
