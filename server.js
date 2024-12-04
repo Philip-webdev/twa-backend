@@ -35,7 +35,7 @@ app.get('/orderly', (req, res) => {
     res.json({ message: 'Welcome to my channel' });
 });
 app.get('/api/cryptocurrency', async (req, res) => {
-    const url = `https://pro-api.coinmarketcap.com/v1/cryptocurrency/map?CMC_PRO_API_KEY=4a218c19-80f5-4eb9-828e-f3e4dd8b05f1`;
+    const url = `https://pro-api.coinmarketcap.com/v1/cryptocurrency/listings/latest?CMC_PRO_API_KEY=4a218c19-80f5-4eb9-828e-f3e4dd8b05f1`;
     try {
         const response = await fetch(url);
         const data = await response.json();
