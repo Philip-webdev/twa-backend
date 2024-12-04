@@ -1,6 +1,6 @@
 const express = require('express');
 const cors = require('cors');
-const fetch = require('node-fetch');
+ 
 const axios = require('axios');
 const mongoose = require('mongoose');
 const Profile = require('./models/profiling');
