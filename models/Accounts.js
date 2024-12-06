@@ -2,15 +2,15 @@ const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
 
 const blogSchema = new Schema({
-    Account_name: {
+    walletName: {
         type: String,
         required: true
     },
-    Account_number: {
+    walletReference: {
         type: String,
         required: true
     },
-    customer_email : {
+    customerEmail : {
         type: String,
         required: true
     }

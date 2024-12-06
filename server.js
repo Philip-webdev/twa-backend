@@ -4,7 +4,7 @@ const cors = require('cors');
 const axios = require('axios');
 const mongoose = require('mongoose');
 const Profile = require('./models/profiling');
-const Account = require('./models/Accounts')
+const Account = require('./models/Accounts');
 const app = express();
 const port = process.env.PORT || 1000;
 const dbURI = 'mongodb+srv://philisobank21:twa123@cluster1.cege3.mongodb.net/?retryWrites=true&w=majority&appName=Cluster1';
@@ -57,13 +57,13 @@ const authString = Buffer.from(`${apiKey}:${clientSecret}`).toString('base64');
 const headers = {
     Authorization: `Basic ${authString}`
 };
-app.post('/api/monnify', (req, res) => {
+app.post('/api/monnify', async (req, res) => {
     const freshAccounts = new Account(req.body);
     const url = `https://sandbox.monnify.com/api/v1/disbursements/wallet`;
     try {
-        const action = axios.post(url, {headers});
-       
-       const result = freshAccounts.save();
+        const action = await axios.post(url,freshAccounts, {headers});
+       console.log(action.data);
+       const result = await freshAccounts.save();
        console.log(result);
     
     } catch (error) {
