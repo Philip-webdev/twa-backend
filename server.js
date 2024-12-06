@@ -4,6 +4,7 @@ const cors = require('cors');
 const axios = require('axios');
 const mongoose = require('mongoose');
 const Profile = require('./models/profiling');
+const Account = require('./models/Accounts')
 const app = express();
 const port = process.env.PORT || 1000;
 const dbURI = 'mongodb+srv://philisobank21:twa123@cluster1.cege3.mongodb.net/?retryWrites=true&w=majority&appName=Cluster1';
@@ -46,6 +47,56 @@ app.get('/api/cryptocurrency', async (req, res) => {
         res.status(500).send(error.toString());
     }
 });
+const apiKey = "MK_TEST_GPRT2H96LH";
+const clientSecret = "WP1FP56Y8RN58W7RSJFUWAHKCWD6BLD1";
+
+// Create the Base64 string
+const authString = Buffer.from(`${apiKey}:${clientSecret}`).toString('base64');
+
+// Add the header to your request
+const headers = {
+    Authorization: `Basic ${authString}`
+};
+app.post('/api/monnify', (req, res) => {
+    const freshAccounts = new Account(req.body);
+    const url = `https://sandbox.monnify.com/api/v1/disbursements/wallet`;
+    try {
+        const action = axios.post(url, {headers});
+       
+       const result = freshAccounts.save();
+       console.log(result);
+    
+    } catch (error) {
+        res.status(500).send(error.toString());
+    }
+});
+
+app.get('/walletdetails', async (req, res) => {
+    const url = `https://sandbox.monnify.com/api/v1/disbursements/wallet`;
+    try {
+        const response = await fetch(url, {headers});
+        const data = await response.json();
+       const result = res.json(data);
+
+    console.log(result);
+    } catch (error) {
+        res.status(500).send(error.toString());
+    }
+});
+
+app.get('/AccBalance', async (req, res)=> { 
+    
+    const url = 'https://sandbox.monnify.com/api/v1/disbursements/wallet/balance';
+    try {
+        const response = await fetch(url, {headers});
+        const data = await response.json();
+       const result = res.json(data);
+
+    console.log(result);
+    } catch (error) {
+        res.status(500).send(error.toString());
+    }
+} );
 app.get('/profile', async (req, res) => {
     try {
         const info = await axios.get('https://philip-webdev.github.io/telegram-webApp/profiler');
