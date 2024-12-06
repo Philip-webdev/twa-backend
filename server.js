@@ -18,7 +18,7 @@ mongoose.connect(dbURI)
         console.error('Database connection error:', err);
     });
 const corsOptions = {
-    origin: ['https://philip-webdev.github.io', 'http://localhost:5173'],
+    origin: ['https://philip-webdev.github.io', 'http://localhost:5173', 'https://sandbox.monnify.com'],
     methods: ['GET', 'POST'],
     credentials: 'true',
     allowedHeaders: ['Content-Type'],
