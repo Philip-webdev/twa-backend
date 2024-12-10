@@ -83,7 +83,9 @@ app.post('/api/monnify', async (req, res) => {
         res.status(500).send(error.toString());
     }
 });
-
+app.get('/api/monnify', (req, res)=>{
+    console.log(response.data);
+})
 // app.get('/api/monnify', async (req, res) => {
 //     const url = `https://sandbox.monnify.com/api/v1/disbursements/wallet`;
 //     try {
