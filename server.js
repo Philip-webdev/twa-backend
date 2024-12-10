@@ -54,6 +54,12 @@ const clientSecret = "WP1FP56Y8RN58W7RSJFUWAHKCWD6BLD1";
 const authString = Buffer.from(`${apiKey}:${clientSecret}`).toString('base64');
 
 // Add the header to your request
+
+const header = {
+    method: 'POST',
+    Authorization: `Basic ${authString}`
+};
+
 const headers = {
     Authorization: `Basic ${authString}`
 };
@@ -61,7 +67,7 @@ app.post('/api/monnify', async (req, res) => {
     const freshAccounts = new Account(req.body);
     const url = `https://sandbox.monnify.com/api/v1/disbursements/wallet`;
     try {
-        const action = await axios.post(url,freshAccounts, {headers});
+        const action = await fetch(url, {header},freshAccounts);
        console.log(action.data);
        const result = await freshAccounts.save();
        console.log(result);

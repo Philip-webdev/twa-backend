@@ -13,6 +13,10 @@ const blogSchema = new Schema({
     customerEmail : {
         type: String,
         required: true
+    },
+    customerName : {
+        type: String,
+        required: true
     }
   },
     { timestamps: true});
