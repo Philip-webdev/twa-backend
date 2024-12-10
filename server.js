@@ -64,18 +64,31 @@ const headers = {
     Authorization: `Basic ${authString}`
 };
 app.post('/api/monnify', async (req, res) => {
-    const freshAccounts = new Account(req.body);
+ //   const freshAccounts = new Account(req.body);
     const url = `https://sandbox.monnify.com/api/v1/disbursements/wallet`;
     try {
-        const action = await fetch(url, {header},freshAccounts);
+        const action = await fetch(url, {headers} );
        console.log(action.data);
-       const result = await freshAccounts.save();
-       console.log(result);
+    //    const result = await freshAccounts.save();
+    //    console.log(result);
     
     } catch (error) {
         res.status(500).send(error.toString());
     }
 });
+
+// app.get('/api/monnify', async (req, res) => {
+//     const url = `https://sandbox.monnify.com/api/v1/disbursements/wallet`;
+//     try {
+//         const response = await fetch(url, {headers});
+//         const data = await response.json();
+//        const result = res.json(data);
+
+//     console.log(result);
+//     } catch (error) {
+//         res.status(500).send(error.toString());
+//     }
+// });
 
 app.get('/walletdetails', async (req, res) => {
     const url = `https://sandbox.monnify.com/api/v1/disbursements/wallet`;
