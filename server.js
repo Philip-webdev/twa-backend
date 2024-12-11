@@ -55,26 +55,28 @@ const authString = Buffer.from(`${apiKey}:${clientSecret}`).toString('base64');
 
 // Add the header to your request
 
-const data = {
-    "walletReference":"ref16842048425966",
-    "walletName":"Staging Wallet - ref16804248425966",
-    "customerName": "John Doe",
-    "bvnDetails": {
-    "bvn": "{{bvn}}",
-    "bvnDateOfBirth": "1997-04-08" 
+const { walletReference, walletName, customerName, bvn, bvnDateOfBirth, customerEmail } = req.body;
+
+const requestBody = {
+    walletReference,
+    walletName,
+    customerName,
+    bvnDetails: {
+        bvn,
+        bvnDateOfBirth,
     },
-    "customerEmail": "smekia@gamil.com"
-}
+    customerEmail,
+};
 const headers = {
     Authorization: `Basic ${authString}`,
-    body: JSON.stringify(data)
+    'Content-Type': 'application/json'
 };
 app.post('/api/monnify', async (req, res) => {
  //   const freshAccounts = new Account(req.body);
 
     const url = `https://sandbox.monnify.com/api/v1/disbursements/wallet`;
     try {
-        const action = await fetch(url, {headers} );
+        const action = await fetch(url, requestBody, {headers} );
        console.log(action.data);
     //    const result = await freshAccounts.save();
     //    console.log(result);
@@ -83,9 +85,7 @@ app.post('/api/monnify', async (req, res) => {
         res.status(500).send(error.toString());
     }
 });
-app.get('/api/monnify', (req, res)=>{
-    console.log(res.data);
-})
+
 // app.get('/api/monnify', async (req, res) => {
 //     const url = `https://sandbox.monnify.com/api/v1/disbursements/wallet`;
 //     try {
