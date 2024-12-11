@@ -55,25 +55,25 @@ const authString = Buffer.from(`${apiKey}:${clientSecret}`).toString('base64');
 
 // Add the header to your request
 
-const { walletReference, walletName, customerName, bvn, bvnDateOfBirth, customerEmail } = req.body;
 
-const requestBody = {
-    walletReference,
-    walletName,
-    customerName,
-    bvnDetails: {
-        bvn,
-        bvnDateOfBirth,
-    },
-    customerEmail,
-};
-const headers = {
-    Authorization: `Basic ${authString}`,
-    'Content-Type': 'application/json'
-};
 app.post('/api/monnify', async (req, res) => {
  //   const freshAccounts = new Account(req.body);
+ const { walletReference, walletName, customerName, bvn, bvnDateOfBirth, customerEmail } = req.body;
 
+ const requestBody = {
+     walletReference,
+     walletName,
+     customerName,
+     bvnDetails: {
+         bvn,
+         bvnDateOfBirth,
+     },
+     customerEmail,
+ };
+ const headers = {
+     Authorization: `Basic ${authString}`,
+     'Content-Type': 'application/json'
+ };
     const url = `https://sandbox.monnify.com/api/v1/disbursements/wallet`;
     try {
         const action = await fetch(url, requestBody, {headers} );
