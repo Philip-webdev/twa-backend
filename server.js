@@ -77,9 +77,10 @@ app.post('/api/monnify', async (req, res) => {
     const url = `https://sandbox.monnify.com/api/v1/disbursements/wallet`;
     try {
         const action = await fetch(url, requestBody, {headers} );
-       console.log(action.data);
-    //    const result = await freshAccounts.save();
-    //    console.log(result);
+        const data = await action.json();
+        const result = res.json(data);
+ 
+     console.log(result);
     
     } catch (error) {
         res.status(500).send(error.toString());
