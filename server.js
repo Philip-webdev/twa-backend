@@ -47,6 +47,20 @@ app.get('/api/cryptocurrency', async (req, res) => {
         res.status(500).send(error.toString());
     }
 });
+
+app.get('/api/cryptoblogs', async (req, res) => {
+    const url = `https://pro-api.coinmarketcap.com/v1/cryptocurrency/info?CMC_PRO_API_KEY=4a218c19-80f5-4eb9-828e-f3e4dd8b05f1`;
+    try {
+        const response = await fetch(url);
+        const data = await response.json();
+       const result = res.json(data);
+
+    console.log(result);
+    } catch (error) {
+        res.status(500).send(error.toString());
+    }
+});
+
 const apiKey = "MK_TEST_GPRT2H96LH";
 const clientSecret = "WP1FP56Y8RN58W7RSJFUWAHKCWD6BLD1";
 
