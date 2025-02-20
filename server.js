@@ -1,4 +1,4 @@
-import { ensureAdmin } from './ensureAdmin';
+
 const express = require('express');
 const cors = require('cors');
 const session = require('express-session'); 
@@ -43,7 +43,17 @@ app.use(session({
             maxAge: 1000 * 60 * 60 * 24, // 24 hours
         },
         }) );
-              
+
+
+        const ensureAdmin = async (req, res, next) => {
+            const user = await Profile;
+
+            req.session.user = { id: user._id, role: "user" };
+            if (!req.session.user || req.session.user.role !== "user") {
+                return res.status(403).json({ message: "Access denied. registered users only." });
+            }
+            next();
+        };
 app.get('/product', (req, res) => {
     res.json({ message: 'testing axios' });
 });
