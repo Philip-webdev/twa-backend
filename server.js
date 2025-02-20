@@ -191,7 +191,7 @@ app.post('/register', async (req, res) => {
     }
 });
 
-// Fetch user data on login (with password comparison)
+
 // app.post('/login', async (req, res) => {
     
 //         const { email, password } = req.body;
@@ -200,7 +200,7 @@ app.post('/register', async (req, res) => {
 // });
 
 app.get('/login',   async (req, res) => {
-    const { email, password } = req.body;
+    
 try{
     // Find the user by email
     const user = await Profile.findOne({ email });
