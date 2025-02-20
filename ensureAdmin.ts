@@ -6,7 +6,7 @@ interface AuthRequest extends Request {
     session: Session & { user?: { id: number; role: string } };
 }
 
-export const ensureAdmin = (req: AuthRequest, res: Response, next: NextFunction) => {
+   const ensureAdmin = (req: AuthRequest, res: Response, next: NextFunction) => {
     if (!req.session.user || req.session.user.role !== "user") {
         return res.status(403).json({ message: "Access denied. registered users only." });
     }
