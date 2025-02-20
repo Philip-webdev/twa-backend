@@ -46,7 +46,7 @@ app.use(session({
 
 
         const ensureAdmin = async (req, res, next) => {
-            const user = await Profile;
+            const user = Profile;
 
             req.session.user = { id: user._id, role: "user" };
             if (!req.session.user || req.session.user.role !== "user") {
@@ -178,7 +178,7 @@ app.get('/profile', async (req, res) => {
 });
 
 
-app.post('/profiler', async (req, res) => {
+app.post('/register', async (req, res) => {
     try {
         const { email, password, ...otherData } = req.body;
         const hashedPassword = await bcrypt.hash(password, 10);
@@ -192,28 +192,30 @@ app.post('/profiler', async (req, res) => {
 });
 
 // Fetch user data on login (with password comparison)
-app.post('/login', async (req, res) => {
-    try {
-        const { email, password } = req.body;
+// app.post('/login', async (req, res) => {
+    
+//         const { email, password } = req.body;
 
-        // Find the user by email
-        const user = await Profile.findOne({ email });
+       
+// });
 
-        // Check if user exists and password matches
-        if (user && await bcrypt.compare(password, user.password)) {
-            req.session.user = { id: user._id, role: "user" };
-            return res.json({ message: "Logged in successfully" });
-        }
+app.get('/login',   async (req, res) => {
+    const { email, password } = req.body;
+try{
+    // Find the user by email
+    const user = await Profile.findOne({ email });
 
-        res.status(401).json({ message: "Invalid credentials" });
-    } catch (error) {
-        console.error('Error during login:', error);
-        res.status(500).json({ error: 'Internal Server Error' });
+    // Check if user exists and password matches
+    if (user && await bcrypt.compare(password, user.password)) {
+        req.session.user = { id: user._id, role: "user" };
+        return res.json({ message: "Logged in successfully" });
     }
-});
 
-app.get('#/',  ensureAdmin,  (req, res) => {
-    res.json({ success: true, message: "Welcome, User!" });});
+    res.status(401).json({ message: "Invalid credentials" });
+} catch (error) {
+    console.error('Error during login:', error);
+    res.status(500).json({ error: 'Internal Server Error' });
+}});
 
 
 app.get('/profiled', async (req, res) => {
