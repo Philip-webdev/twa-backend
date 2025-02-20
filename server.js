@@ -1,6 +1,9 @@
 const express = require('express');
 const cors = require('cors');
- 
+const session = require('express-session');
+const dotenv  = require('dotenv');
+const bcrypt = require('bcrypt');
+const MongoStore = require('connect-mongo');
 const axios = require('axios');
 const mongoose = require('mongoose');
 const Profile = require('./models/profiling');
@@ -27,7 +30,20 @@ const corsOptions = {
 app.use(express.json()); // Make sure to parse JSON request bodies
  
 app.use(cors(corsOptions));
-
+app.use(session({
+            secret: process.env.SESSION_SECRET || "supersecretkey",
+              resave: false,
+             saveUninitialized: false,
+              store: MongoStore.create({
+           mongoUrl: process.env.MONGO_URI || 'mongodb+srv://philisobank21:twa123@cluster1.cege3.mongodb.net/?retryWrites=true&w=majority&appName=Cluster1',
+                 collectionName: "sessions",  }),
+                  cookie: {
+                secure: process.env.NODE_ENV === "production", // Use HTTPS in production
+            httpOnly: true, // Prevents client-side access to cookies
+            maxAge: 1000 * 60 * 60 * 24, // 24 hours
+        },
+        }) );
+              
 app.get('/product', (req, res) => {
     res.json({ message: 'testing axios' });
 });
@@ -150,10 +166,13 @@ app.get('/profile', async (req, res) => {
         res.status(500).json({ error: 'Internal Server Error' });
     }
 });
+
+
 app.post('/profiler', async (req, res) => {
     try {
-      
-        const freshPerson = new Profile(req.body);
+        const { email, password, ...otherData } = req.body;
+        const hashedPassword = await bcrypt.hash(password, 10);
+        const freshPerson = new Profile({ email, password: hashedPassword, ...otherData });
         const result = await freshPerson.save();
         res.json(result);
     } catch (error) {
@@ -161,6 +180,29 @@ app.post('/profiler', async (req, res) => {
         res.status(500).json({ error: 'Internal Server Error' });
     }
 });
+
+// Fetch user data on login (with password comparison)
+app.post('/login', async (req, res) => {
+    try {
+        const { email, password } = req.body;
+
+        // Find the user by email
+        const user = await Profile.findOne({ email });
+
+        // Check if user exists and password matches
+        if (user && await bcrypt.compare(password, user.password)) {
+            req.session.user = { id: user._id, role: "user" };
+            return res.json({ message: "Logged in successfully" });
+        }
+
+        res.status(401).json({ message: "Invalid credentials" });
+    } catch (error) {
+        console.error('Error during login:', error);
+        res.status(500).json({ error: 'Internal Server Error' });
+    }
+});
+
+
 app.get('/profiled', async (req, res) => {
     try {
         const results = await Profile.find(); // Fetch all profiles
@@ -170,3 +212,5 @@ app.get('/profiled', async (req, res) => {
         res.status(500).json({ error: 'Internal Server Error' });
     }
 }); 
+
+
