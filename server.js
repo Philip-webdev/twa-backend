@@ -1,3 +1,4 @@
+import { ensureAdmin } from './ensureAdmin';
 const express = require('express');
 const cors = require('cors');
 const session = require('express-session');
@@ -21,7 +22,7 @@ mongoose.connect(dbURI)
         console.error('Database connection error:', err);
     });
 const corsOptions = {
-    origin: ['https://philip-webdev.github.io','https://sandbox.monnify.com', 'http://localhost:5173'  ],
+    origin: ['https://philip-webdev.github.io','https://twa-backend-g83o.onrender.com', 'https://sandbox.monnify.com', 'http://localhost:5173'  ],
     methods: ['GET', 'POST'],
     credentials: 'true',
     allowedHeaders: ['Content-Type'],
@@ -201,6 +202,9 @@ app.post('/login', async (req, res) => {
         res.status(500).json({ error: 'Internal Server Error' });
     }
 });
+
+app.get('#/',  ensureAdmin,  (req, res) => {
+    res.json({ success: true, message: "Welcome, User!" });});
 
 
 app.get('/profiled', async (req, res) => {
