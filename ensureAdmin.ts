@@ -1,7 +1,9 @@
 import { Request, Response, NextFunction } from "express-serve-static-core";
 import  "typescript";   
+import { Session } from "express-session";
+
 interface AuthRequest extends Request {
-    session: { user?: { id: number; role: string } };
+    session: Session & { user?: { id: number; role: string } };
 }
 
 export const ensureAdmin = (req: AuthRequest, res: Response, next: NextFunction) => {

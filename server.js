@@ -1,6 +1,6 @@
-import { ensureAdmin } from './ensureAdmin';
 const express = require('express');
 const cors = require('cors');
+const { ensureAdmin } = require('./ensureAdmin');
 const session = require('express-session');
   
 const bcrypt = require('bcrypt');
