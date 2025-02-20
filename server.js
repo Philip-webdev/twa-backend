@@ -1,3 +1,4 @@
+import { ensureAdmin } from './ensureAdmin';
 const express = require('express');
 const cors = require('cors');
 const { ensureAdmin } = require('./ensureAdmin');

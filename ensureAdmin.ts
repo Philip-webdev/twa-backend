@@ -12,3 +12,4 @@ export const ensureAdmin = (req: AuthRequest, res: Response, next: NextFunction)
     }
     next();
 };
+export default ensureAdmin;
