@@ -31,18 +31,19 @@ app.use(express.json()); // Make sure to parse JSON request bodies
  
 app.use(cors(corsOptions));
 app.use(session({
-            secret: process.env.SESSION_SECRET || "supersecretkey",
-              resave: false,
-             saveUninitialized: false,
-              store: MongoStore.create({
-           mongoUrl: process.env.MONGO_URI || 'mongodb+srv://philisobank21:twa123@cluster1.cege3.mongodb.net/?retryWrites=true&w=majority&appName=Cluster1',
-                 collectionName: "sessions",  }),
-                  cookie: {
-                secure: process.env.NODE_ENV === "production", // Use HTTPS in production
-            httpOnly: true, // Prevents client-side access to cookies
-            maxAge: 1000 * 60 * 60 * 24, // 24 hours
-        },
-        }) );
+    secret: process.env.SESSION_SECRET || "supersecretkey",
+    resave: false,
+    saveUninitialized: false,
+    store: MongoStore.create({
+        mongoUrl: process.env.MONGO_URI || 'mongodb+srv://philisobank21:twa123@cluster1.cege3.mongodb.net/?retryWrites=true&w=majority&appName=Cluster1',
+        collectionName: "profiles",
+    }),
+    cookie: {
+        secure: process.env.NODE_ENV === "production", // Use HTTPS in production
+        httpOnly: true, // Prevents client-side access to cookies
+        maxAge: 1000 * 60 * 60 * 24, // 24 hours
+    },
+}));
 
 
         const ensureAdmin = async (req, res, next) => {
