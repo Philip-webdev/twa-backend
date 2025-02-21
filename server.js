@@ -21,7 +21,7 @@ mongoose.connect(dbURI)
         console.error('Database connection error:', err);
     });
 const corsOptions = {
-    origin: ['https://philip-webdev.github.io','https://twa-backend-g83o.onrender.com', 'https://sandbox.monnify.com', 'http://localhost:5173'  ],
+    origin: ['https://nexr-b2db1.web.app/','https://philip-webdev.github.io','https://twa-backend-g83o.onrender.com', 'https://sandbox.monnify.com', 'http://localhost:5173'  ],
     methods: ['GET', 'POST'],
     credentials: 'true',
     allowedHeaders: ['Content-Type', 'Authorization'],
