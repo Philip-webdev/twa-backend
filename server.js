@@ -28,7 +28,7 @@ const corsOptions = {
 };
 
 app.use(express.json()); // Make sure to parse JSON request bodies
- 
+app.options('*', cors(corsOptions));
 app.use(cors(corsOptions));
 app.use((req, res, next) => {
     res.header("Access-Control-Allow-Credentials", "true");
