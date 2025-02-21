@@ -24,12 +24,17 @@ const corsOptions = {
     origin: ['https://philip-webdev.github.io','https://twa-backend-g83o.onrender.com', 'https://sandbox.monnify.com', 'http://localhost:5173'  ],
     methods: ['GET', 'POST'],
     credentials: 'true',
-    allowedHeaders: ['Content-Type'],
+    allowedHeaders: ['Content-Type', 'Authorization'],
 };
 
 app.use(express.json()); // Make sure to parse JSON request bodies
  
 app.use(cors(corsOptions));
+app.use((req, res, next) => {
+    res.header("Access-Control-Allow-Credentials", "true");
+    next();
+});
+
 app.use(session({
     secret: process.env.SESSION_SECRET || "supersecretkey",
     resave: false,
@@ -40,6 +45,7 @@ app.use(session({
     }),
     cookie: {
         secure: process.env.NODE_ENV === "production", // Use HTTPS in production
+        sameSite: 'None',
         httpOnly: true, // Prevents client-side access to cookies
         maxAge: 1000 * 60 * 60 * 24, // 24 hours
     },
