@@ -20,20 +20,21 @@ mongoose.connect(dbURI)
     .catch((err) => {
         console.error('Database connection error:', err);
     });
+    app.use((req, res, next) => {
+        res.header("Access-Control-Allow-Credentials", "true");
+        next();
+    });
 const corsOptions = {
     origin: ['https://nexr-b2db1.web.app/','https://philip-webdev.github.io','https://twa-backend-g83o.onrender.com', 'https://sandbox.monnify.com', 'http://localhost:5173'  ],
     methods: ['GET', 'POST'],
     credentials: 'true',
-    allowedHeaders: ['Content-Type', 'Authorization'],
+    allowedHeaders: ['Content-Type', 'Authorization',"application/json"],
 };
 
 app.use(express.json()); // Make sure to parse JSON request bodies
-app.options('*', cors(corsOptions));
+ 
 app.use(cors(corsOptions));
-app.use((req, res, next) => {
-    res.header("Access-Control-Allow-Credentials", "true");
-    next();
-});
+
 
 app.use(session({
     secret: process.env.SESSION_SECRET || "supersecretkey",
