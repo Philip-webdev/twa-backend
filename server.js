@@ -188,9 +188,9 @@ app.get('/profile', async (req, res) => {
 
 app.post('/register', async (req, res) => {
     try {
-        const { email, password, ...otherData } = req.body;
+        const { email, password   } = req.body;
         const hashedPassword = await bcrypt.hash(password, 10);
-        const freshPerson = new Profile({ email, password: hashedPassword, ...otherData });
+        const freshPerson = new Profile({ email, password: hashedPassword });
         const result = await freshPerson.save();
         res.json(result);
     } catch (error) {
