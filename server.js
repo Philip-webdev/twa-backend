@@ -25,13 +25,13 @@ mongoose.connect(dbURI)
         next();
     });
 const corsOptions = {
-    origin: ['https://nexr-b2db1.web.app/','https://philip-webdev.github.io','https://twa-backend-g83o.onrender.com', 'https://sandbox.monnify.com', 'http://localhost:5173'  ],
+    origin: ['https://nexr-b2db1.web.app/','https://philip-webdev.github.io',  'https://sandbox.monnify.com', 'http://localhost:5173'  ],
     methods: ['GET', 'POST'],
-    credentials: 'true',
-    allowedHeaders: ['Content-Type', 'Authorization',"application/json"],
+    credentials: true,
+    allowedHeaders: ['Content-Type', 'Authorization','application/json'],
 };
 
-app.use(express.json()); // Make sure to parse JSON request bodies
+app.use(express.json()); 
  
 app.use(cors(corsOptions));
 
