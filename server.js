@@ -25,7 +25,7 @@ mongoose.connect(dbURI)
         next();
     });
 const corsOptions = {
-    origin: ['https://nexr-b2db1.web.app/','https://philip-webdev.github.io',  'https://sandbox.monnify.com', 'http://localhost:5173'  ],
+    origin: ['https://nexr-b2db1.web.app','https://philip-webdev.github.io',  'https://sandbox.monnify.com', 'http://localhost:5173'  ],
     methods: ['GET', 'POST'],
     credentials: true,
     allowedHeaders: ['Content-Type', 'Authorization','application/json'],
@@ -211,6 +211,8 @@ app.get('/login',   async (req, res) => {
     
 try{
     // Find the user by email
+    
+    axios.get('https://nexr-b2db1.web.app/login', { email });
     const user = await Profile.findOne({ email });
 
     // Check if user exists and password matches
