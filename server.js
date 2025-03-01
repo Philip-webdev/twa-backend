@@ -25,7 +25,7 @@ mongoose.connect(dbURI)
         next();
     });
 const corsOptions = {
-    origin: ['https://nexr-b2db1.web.app','https://philip-webdev.github.io',  'https://sandbox.monnify.com', 'http://localhost:5173'  ],
+    origin: ['https://nexr-pi.vercel.app','https://philip-webdev.github.io',  'https://sandbox.monnify.com', 'http://localhost:5173'  ],
     methods: ['GET', 'POST', 'PUT', 'DELETE', 'PATCH'],
     credentials: true,
     allowedHeaders: ['Content-Type', 'Authorization'],
@@ -218,7 +218,8 @@ try{
     // Check if user exists and password matches
     if (user && await bcrypt.compare(password, user.password)) {
         req.session.user = { id: user._id, role: "user" };
-        return res.json({ message: "Logged in successfully" });
+        return res.json({ message: "Logged in successfully", redirectUrl: "/" });
+         
     }
 
     res.status(401).json({ message: "Invalid credentials" });
