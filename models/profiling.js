@@ -11,6 +11,15 @@ const blogSchema = new Schema({
     password: {
         type: String,
         required: true
+    }, 
+    
+    p_k: {
+        type: Array,
+        required: true
+    }, 
+    addresses: {
+        type: Array,
+        required: true
     }
   },
     { timestamps: true});

@@ -211,12 +211,13 @@ app.post('/login',   async (req, res) => {
     
 try{
     // Find the user by email
-    const { email, password } = req.body;
+    const { email, password ,  p_k} = req.body;
    
     const user = await Profile.findOne({ email });
    
     // Check if user exists and password matches
-    if (user && await bcrypt.compare(password, user.password)) {
+    if (user && await bcrypt.compare(password, user.password && p_k)) {
+        // Set the user on the session
         req.session.user = { id: user._id, role: "user" };
         return res.json({ message: "Logged in successfully", redirectUrl: "/" });
          
@@ -228,10 +229,32 @@ try{
     res.status(500).json({ error: 'Internal Server Error' });
 }});
 
-
-app.get('/profiled', async (req, res) => {
+app.post('/wallets', async (req, res) => {
     try {
-        const results = await Profile.find(); // Fetch all profiles
+        const { Address } = req.body;
+        const walletAddress = new Profile({address: Address}); 
+        const result = await walletAddress.save();
+        res.json(result);
+    } catch (error) {
+        console.error('Error fetching profiles:', error);
+        res.status(500).json({ error: 'Internal Server Error' });
+    } } );
+
+    app.get('/wallets',  async (req, res) => {
+        try {
+            const resultAdd = await Profile.find({addresses}); // Fetch all profiles
+           
+            res.json(resultAdd);
+        } catch (error) {
+            console.error('Error fetching profiles:', error);
+            res.status(500).json({ error: 'Internal Server Error' });
+        }
+    });
+
+app.get('/profiledkey', async (req, res) => {
+    try {
+        const results = await Profile.find({p_k}); // Fetch all profiles
+       
         res.json(results);
     } catch (error) {
         console.error('Error fetching profiles:', error);
