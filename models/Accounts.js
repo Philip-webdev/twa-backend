@@ -2,22 +2,30 @@ const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
 
 const blogSchema = new Schema({
-    walletName: {
+    P_k: {
         type: String,
-        required: true
-    },
-    walletReference: {
+         
+    }, 
+    addresses: {
         type: String,
-        required: true
-    },
-    customerEmail : {
-        type: String,
-        required: true
-    },
-    customerName : {
-        type: String,
-        required: true
+         
     }
+    // walletName: {
+    //     type: String,
+    //     required: true
+    // },
+    // walletReference: {
+    //     type: String,
+    //     required: true
+    // },
+    // customerEmail : {
+    //     type: String,
+    //     required: true
+    // },
+    // customerName : {
+    //     type: String,
+    //     required: true
+    // }
   },
     { timestamps: true});
 

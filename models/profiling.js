@@ -13,14 +13,7 @@ const blogSchema = new Schema({
         required: true
     }, 
     
-    P_k: {
-        type: String,
-         
-    }, 
-    addresses: {
-        type: String,
-         
-    }
+   
   },
     { timestamps: true});
 

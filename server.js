@@ -225,7 +225,7 @@ try{
 app.post('/wallets', async (req, res) => {
     try {
         const { Address } = req.body;
-        const walletAddress = new Profile({addresses: Address}); 
+        const walletAddress = new Account({addresses: Address}); 
         const result = await walletAddress.save();
         res.json(result);
     } catch (error) {
@@ -235,7 +235,7 @@ app.post('/wallets', async (req, res) => {
 
     app.get('/wallets',  async (req, res) => {
         try {
-            const resultAddresses = await Profile.find({addresses}); // Fetch all profiles
+            const resultAddresses = await Account.find({addresses}); // Fetch all profiles
            
             res.json(resultAddresses);
         } catch (error) {
@@ -247,7 +247,7 @@ app.post('/wallets', async (req, res) => {
     app.post('/profiledkey', async (req, res) => {
         try {
             const { p_k } = req.body;
-            const privatekeys = new Profile({P_k: p_k}); 
+            const privatekeys = new Account ({P_k: p_k}); 
             res.json(privatekeys);
         } catch (error) {
             console.error('Error fetching profiles:', error);
@@ -257,7 +257,7 @@ app.post('/wallets', async (req, res) => {
 
 app.get('/profiledkey', async (req, res) => {
     try {
-        const results = await Profile.find({P_k}); // Fetch all profiles
+        const results = await Account.find({P_k}); // Fetch all profiles
        
         res.json(results);
     } catch (error) {
