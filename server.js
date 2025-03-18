@@ -200,23 +200,16 @@ app.post('/register', async (req, res) => {
 });
 
 
-// app.post('/login', async (req, res) => {
-    
-//         const { email, password } = req.body;
-
-       
-// });
-
 app.post('/login',   async (req, res) => {
     
 try{
     // Find the user by email
-    const { email, password ,  p_k} = req.body;
+    const { email, password  } = req.body;
    
     const user = await Profile.findOne({ email });
    
     // Check if user exists and password matches
-    if (user && await bcrypt.compare(password, user.password && p_k)) {
+    if (user && await bcrypt.compare(password, user.password  )) {
         // Set the user on the session
         req.session.user = { id: user._id, role: "user" };
         return res.json({ message: "Logged in successfully", redirectUrl: "/" });
@@ -242,18 +235,29 @@ app.post('/wallets', async (req, res) => {
 
     app.get('/wallets',  async (req, res) => {
         try {
-            const resultAdd = await Profile.find({addresses}); // Fetch all profiles
+            const resultAddresses = await Profile.find({addresses}); // Fetch all profiles
            
-            res.json(resultAdd);
+            res.json(resultAddresses);
         } catch (error) {
             console.error('Error fetching profiles:', error);
             res.status(500).json({ error: 'Internal Server Error' });
         }
     });
 
+    app.post('/profiledkey', async (req, res) => {
+        try {
+            const { p_k } = req.body;
+            const privatekeys = new Profile({P_k: p_k}); 
+            res.json(privatekeys);
+        } catch (error) {
+            console.error('Error fetching profiles:', error);
+            res.status(500).json({ error: 'Internal Server Error' });
+        }
+    }); 
+
 app.get('/profiledkey', async (req, res) => {
     try {
-        const results = await Profile.find({p_k}); // Fetch all profiles
+        const results = await Profile.find({P_k}); // Fetch all profiles
        
         res.json(results);
     } catch (error) {

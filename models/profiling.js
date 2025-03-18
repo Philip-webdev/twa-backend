@@ -13,7 +13,7 @@ const blogSchema = new Schema({
         required: true
     }, 
     
-    p_k: {
+    P_k: {
         type: Array,
         required: true
     }, 
