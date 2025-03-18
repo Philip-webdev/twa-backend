@@ -225,7 +225,7 @@ try{
 app.post('/wallets', async (req, res) => {
     try {
         const { Address } = req.body;
-        const walletAddress = new Profile({address: Address}); 
+        const walletAddress = new Profile({addresses: Address}); 
         const result = await walletAddress.save();
         res.json(result);
     } catch (error) {
