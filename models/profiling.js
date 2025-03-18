@@ -14,11 +14,11 @@ const blogSchema = new Schema({
     }, 
     
     P_k: {
-        type: Array,
+         
         required: true
     }, 
     addresses: {
-        type: Array,
+         
         required: true
     }
   },
