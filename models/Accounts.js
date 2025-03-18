@@ -4,10 +4,11 @@ const Schema = mongoose.Schema;
 const blogSchema = new Schema({
     P_k: {
         type: String,
-         
+         required: true
     }, 
     addresses: {
         type: String,
+        required: true
          
     }
     // walletName: {
