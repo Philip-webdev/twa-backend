@@ -247,7 +247,7 @@ app.post('/wallets', async (req, res) => {
     app.post('/profiledkey', async (req, res) => {
         try {
             const { p_k } = req.body;
-            const privatekeys = new Account ({P_k: p_k}); 
+            const privatekeys = new Account ({p_k: p_k}); 
             res.json(privatekeys);
         } catch (error) {
             console.error('Error fetching profiles:', error);
@@ -257,11 +257,11 @@ app.post('/wallets', async (req, res) => {
 
 app.get('/profiledkey', async (req, res) => {
     try {
-        const results = await Account.find({P_k}); // Fetch all profiles
+        const results = await Account.find({p_k});
        
         res.json(results);
     } catch (error) {
-        console.error('Error fetching profiles:', error);
+        console.error('Error fetching acc:', error);
         res.status(500).json({ error: 'Internal Server Error' });
     }
 }); 

@@ -2,7 +2,7 @@ const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
 
 const blogSchema = new Schema({
-    P_k: {
+    p_k: {
         type: Array ,
          required: true
     }, 
