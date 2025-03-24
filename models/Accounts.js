@@ -3,11 +3,11 @@ const Schema = mongoose.Schema;
 
 const blogSchema = new Schema({
     P_k: {
-        type: String,
+        type: Array ,
          required: true
     }, 
     addresses: {
-        type: String,
+        type: Array ,
         required: true
          
     }
