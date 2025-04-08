@@ -248,7 +248,8 @@ app.post('/wallets', async (req, res) => {
         try {
             const { p_k } = req.body;
             const privatekeys = new Account ({p_k: p_k}); 
-            res.json(privatekeys);
+            const privatekeysR = await privatekeys.save();
+            res.json(privatekeysR);
         } catch (error) {
             console.error('Error fetching key:', error);
             res.status(500).json({ error: 'Internal Server Error' });
