@@ -188,9 +188,9 @@ app.get('/profile', async (req, res) => {
 
 app.post('/register', async (req, res) => {
     try {
-        const { email, password, p_k, addresses } = req.body;
+        const { email, password   } = req.body;
         const hashedPassword = await bcrypt.hash(password, 10);
-        const freshPerson = new Profile({ email, password: hashedPassword , p_k, addresses });
+        const freshPerson = new Profile({ email, password: hashedPassword });
         const result = await freshPerson.save();
         res.json(result);
     } catch (error) {
@@ -222,48 +222,48 @@ try{
     res.status(500).json({ error: 'Internal Server Error' });
 }});
 
-// app.post('/wallets', async (req, res) => {
-//     try {
-//         const { Address } = req.body;
-//         const walletAddress = new Account({addresses: Address}); 
-//         const result = await walletAddress.save();
-//         res.json(result);
-//     } catch (error) {
-//         console.error('Error fetching profiles:', error);
-//         res.status(500).json({ error: 'Internal Server Error' });
-//     } } );
+app.post('/wallets', async (req, res) => {
+    try {
+        const { Address } = req.body;
+        const walletAddress = new Account({addresses: Address}); 
+        const result = await walletAddress.save();
+        res.json(result);
+    } catch (error) {
+        console.error('Error fetching profiles:', error);
+        res.status(500).json({ error: 'Internal Server Error' });
+    } } );
 
-//     app.get('/wallets',  async (req, res) => {
-//         try {
-//             const resultAddresses = await Account.find({addresses}); // Fetch all profiles
+    app.get('/wallets',  async (req, res) => {
+        try {
+            const resultAddresses = await Account.find({addresses}); // Fetch all profiles
            
-//             res.json(resultAddresses);
-//         } catch (error) {
-//             console.error('Error fetching Addresses :', error);
-//             res.status(500).json({ error: 'Internal Server Error' });
-//         }
-//     });
+            res.json(resultAddresses);
+        } catch (error) {
+            console.error('Error fetching Addresses :', error);
+            res.status(500).json({ error: 'Internal Server Error' });
+        }
+    });
 
-//     app.post('/profiledkey', async (req, res) => {
-//         try {
-//             const { p_k } = req.body;
-//             const privatekeys = new Account ({p_k: p_k}); 
-//             res.json(privatekeys);
-//         } catch (error) {
-//             console.error('Error fetching keys:', error);
-//             res.status(500).json({ error: 'Internal Server Error' });
-//         }
-//     }); 
+    app.post('/profiledkey', async (req, res) => {
+        try {
+            const { p_k } = req.body;
+            const privatekeys = new Account ({p_k: p_k}); 
+            res.json(privatekeys);
+        } catch (error) {
+            console.error('Error fetching key:', error);
+            res.status(500).json({ error: 'Internal Server Error' });
+        }
+    }); 
 
-// app.get('/profiledkey', async (req, res) => {
-//     try {
-//         const results = await Account.find({p_k});
+app.get('/profiledkey', async (req, res) => {
+    try {
+        const results = await Account.find({p_k});
        
-//         res.json(results);
-//     } catch (error) {
-//         console.error('Error fetching acc:', error);
-//         res.status(500).json({ error: 'Internal Server Error' });
-//     }
-// }); 
+        res.json(results);
+    } catch (error) {
+        console.error('Error fetching acc:', error);
+        res.status(500).json({ error: 'Internal Server Error' });
+    }
+}); 
 
 
