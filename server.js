@@ -239,7 +239,7 @@ app.post('/wallets', async (req, res) => {
            
             res.json(resultAddresses);
         } catch (error) {
-            console.error('Error fetching profiles:', error);
+            console.error('Error fetching Addresses :', error);
             res.status(500).json({ error: 'Internal Server Error' });
         }
     });
@@ -250,7 +250,7 @@ app.post('/wallets', async (req, res) => {
             const privatekeys = new Account ({p_k: p_k}); 
             res.json(privatekeys);
         } catch (error) {
-            console.error('Error fetching profiles:', error);
+            console.error('Error fetching keys:', error);
             res.status(500).json({ error: 'Internal Server Error' });
         }
     }); 
