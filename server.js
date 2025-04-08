@@ -142,7 +142,6 @@ app.post('/api/monnify', async (req, res) => {
 //         const response = await fetch(url, {headers});
 //         const data = await response.json();
 //        const result = res.json(data);
-
 //     console.log(result);
 //     } catch (error) {
 //         res.status(500).send(error.toString());
