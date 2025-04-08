@@ -1,5 +1,4 @@
 const mongoose = require('mongoose');
-const { json } = require('stream/consumers');
 const Schema = mongoose.Schema;
 
 const blogSchema = new Schema({
@@ -14,14 +13,7 @@ const blogSchema = new Schema({
         required: true
     }, 
     
-    p_k: {
-        type: any 
-            
-    }, 
-    addresses: {
-        type: any
-        
-  }},
+  },
     { timestamps: true});
 
     const Profile =  mongoose.model('Profile', blogSchema);
