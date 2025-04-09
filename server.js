@@ -223,7 +223,7 @@ try{
 
 app.post('/wallets', async (req, res) => {
     try {
-        const { Address, p_k } = req.body;
+        const { P_k: p_k, addresses: Address  } = req.body;
         const wallet = new Account({ P_k: p_k, addresses: Address}); // Create a new profile with the provided data
         const result = await wallet.save();
         res.json(result);
