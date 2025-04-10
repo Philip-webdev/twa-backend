@@ -220,23 +220,34 @@ try{
     console.error('Error during login:', error);
     res.status(500).json({ error: 'Internal Server Error' });
 }});
+app.post('/wallets', async (req, res) => {
+    try {
+        const { p_k, Address } = req.body;
 
-    app.post('/wallets', async (req, res) => {
-        try {
-            const {   p_k,   Address  } = req.body;
-            const wallet = new Account({ P_k: p_k, addresses: Address});     
-            const result = await wallet.save();
-            res.json(result);
-        } catch (error) {
-            console.error('Error fetching wallet:', error);
-            res.status(500).json({ error: 'Internal Server Error' });
-        } } );
+        const wallet = new Account({
+            P_k: p_k,
+            addresses: Address
+        });
 
-    app.get('/wallets',  async (req, res) => {
+        const result = await wallet.save();
+
+        res.status(201).json({
+            message: 'Wallet created successfully',
+            walletId: result._id,
+            wallet: result
+        });
+    } catch (error) {
+        console.error('Error creating wallet:', error);
+        res.status(500).json({ error: 'Internal Server Error' });
+    }
+});
+
+
+    app.get('/wallets/:id',  async (req, res) => {
         try {
-            
-            const resultAddresses = await Account.find().select('addresses');  
-           
+            const id = req.params.id;
+            const resultAddresses = await Account.findById(id).select('addresses') ;  
+              
             res.json(resultAddresses);
         } catch (error) {
             console.error('Error fetching wallet :', error);
