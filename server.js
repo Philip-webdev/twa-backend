@@ -224,7 +224,7 @@ try{
     app.post('/wallets', async (req, res) => {
         try {
             const {   p_k,   Address  } = req.body;
-            const wallet = new Account({ P_k: p_k, addresses: Address});     Create a new profile with the provided data
+            const wallet = new Account({ P_k: p_k, addresses: Address});     
             const result = await wallet.save();
             res.json(result);
         } catch (error) {
@@ -234,7 +234,7 @@ try{
 
     app.get('/wallets',  async (req, res) => {
         try {
-            const resultAddresses = await Profile.find({addresses}); // Fetch all profiles
+            const resultAddresses = await Account.find({addresses}); // Fetch all profiles
            
             res.json(resultAddresses);
         } catch (error) {
