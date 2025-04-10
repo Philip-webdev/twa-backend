@@ -2,15 +2,15 @@ const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
 
 const blogSchema = new Schema({
-    p_k: {
-        type: Array ,
-         required: true
-    }, 
-    addresses: {
-        type: Array ,
-        required: true
-         
-    }
+  P_k: {
+    type: Array ,
+     required: true
+}, 
+addresses: {
+    type: Array ,
+    required: true
+     
+}
     // walletName: {
     //     type: String,
     //     required: true
