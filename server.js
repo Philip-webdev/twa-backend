@@ -234,7 +234,7 @@ try{
 
     app.get('/wallets',  async (req, res) => {
         try {
-            const {   addresses: Address  } = req.query;
+            const {   addresses } = req.query;
             const resultAddresses = await Account.findOne({addresses});  
            
             res.json(resultAddresses);
