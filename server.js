@@ -234,7 +234,8 @@ try{
 
     app.get('/wallets',  async (req, res) => {
         try {
-            const resultAddresses = await Account.findOne({addresses}); // Fetch all profiles
+            const {   addresses: Address  } = req.body;
+            const resultAddresses = await Account.findOne({addresses});  
            
             res.json(resultAddresses);
         } catch (error) {
