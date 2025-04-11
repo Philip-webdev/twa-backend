@@ -25,7 +25,7 @@ mongoose.connect(dbURI)
         next();
     });
 const corsOptions = {
-    origin: ['https://nexr-pi.vercel.app','https://philip-webdev.github.io',  'https://sandbox.monnify.com', 'http://localhost:5173'  ],
+    origin: ['https://nexr-pi.vercel.app','https://philip-webdev.github.io', 'https://twa-backend-g83o.onrender.com',  'https://sandbox.monnify.com', 'http://localhost:5173'  ],
     methods: ['GET', 'POST', 'PUT', 'DELETE', 'PATCH'],
     credentials: true,
     allowedHeaders: ['Content-Type', 'Authorization'],
