@@ -231,11 +231,10 @@ app.post('/wallets', async (req, res) => {
 
         const result = await wallet.save();
 
-        res.status(201).json({
-            message: 'Wallet created successfully',
-            walletId: result._id,
-            wallet: result
-        });
+       
+        axios.post('https://twa-backend-g83o.onrender.com/id', {
+            id: result._id 
+          });
     } catch (error) {
         console.error('Error creating wallet:', error);
         res.status(500).json({ error: 'Internal Server Error' });
