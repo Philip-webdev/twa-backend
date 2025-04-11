@@ -25,7 +25,7 @@ mongoose.connect(dbURI)
         next();
     });
 const corsOptions = {
-    origin: ['https://nexr-pi.vercel.app','https://philip-webdev.github.io', 'https://twa-backend-g83o.onrender.com',  'https://sandbox.monnify.com', 'http://localhost:5173'  ],
+    origin: ['https://nexr-pi.vercel.app','https://philip-webdev.github.io',  'https://sandbox.monnify.com', 'http://localhost:5173'  ],
     methods: ['GET', 'POST', 'PUT', 'DELETE', 'PATCH'],
     credentials: true,
     allowedHeaders: ['Content-Type', 'Authorization'],
@@ -231,10 +231,11 @@ app.post('/wallets', async (req, res) => {
 
         const result = await wallet.save();
 
-       
-        axios.post('https://twa-backend-g83o.onrender.com/id', {
-            id: result._id 
-          });
+        res.status(201).json({
+            message: 'Wallet created successfully',
+            walletId: result._id,
+            wallet: result
+        });
     } catch (error) {
         console.error('Error creating wallet:', error);
         res.status(500).json({ error: 'Internal Server Error' });
