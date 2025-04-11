@@ -242,10 +242,10 @@ app.post('/wallets', async (req, res) => {
 });
 
 
-    app.get('/wallets',  async (req, res) => {
+    app.get('/wallets/:id',  async (req, res) => {
         try {
-            
-            const resultAddresses = await Account.find().select('addresses') ;  
+            const id = req.params.id;
+            const resultAddresses = await Account.findById(id).select('addresses') ;  
               
             res.json(resultAddresses);
         } catch (error) {
