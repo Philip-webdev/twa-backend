@@ -5,7 +5,9 @@ const blogSchema = new Schema({
      
     email: {
         type: String,
-        required: true
+        required: true,
+        unique: true,
+        match: /.+\@.+\..+/
     },
     
     password: {

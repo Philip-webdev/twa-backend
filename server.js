@@ -11,7 +11,10 @@ const Account = require('./models/Accounts');
 const app = express();
 const port = process.env.PORT || 1000;
 const dbURI = 'mongodb+srv://philisobank21:twa123@cluster1.cege3.mongodb.net/?retryWrites=true&w=majority&appName=Cluster1';
-mongoose.connect(dbURI)
+mongoose.connect(dbURI, {
+  useNewUrlParser: true,
+  useUnifiedTopology: true,
+})
     .then((result) => {
         app.listen(port, () => {
             console.log(`Server running on 1000`);
@@ -220,6 +223,8 @@ try{
     console.error('Error during login:', error);
     res.status(500).json({ error: 'Internal Server Error' });
 }});
+
+
 app.post('/wallets', async (req, res) => {
     try {
         const { p_k, Address } = req.body;
@@ -255,4 +260,68 @@ app.post('/wallets', async (req, res) => {
         }
     });
 
-   
+  
+// User schema
+const userSchema = new mongoose.Schema({
+  
+  phone: String,
+  moniepointWallet: { type: Number },
+  frozenFunds: { type: Number }
+});
+const User = mongoose.model('User', userSchema);
+
+// Node schema
+const nodeSchema = new mongoose.Schema({
+  creator: { type: mongoose.Schema.Types.ObjectId, ref: 'User' },
+  packageCost: Number,
+  participants: [{ user: { type: mongoose.Schema.Types.ObjectId, ref: 'User' }, frozen: Number }],
+  isBankrupt: { type: Boolean, default: false }
+});
+const Node = mongoose.model('Node', nodeSchema);
+
+// Create user
+app.post('/users', async (req, res) => {
+  const user = new User(req.body);
+ const Users = await user.save();
+    res.status(201).json({
+            message: 'user created successfully',
+            userId: Users._id,
+            user: Users
+        });
+  
+});
+
+// Create node (creator pays for package)
+app.post('/nodes', async (req, res) => {
+  const { creatorId, packageCost } = req.body;
+  const creator = await User.findById(creatorId);
+  if (!creator || creator.moniepointWallet < ( packageCost / 5) ) {
+    return res.status(400).json({ error: 'Insufficient funds or user not found' });
+  }
+  creator.moniepointWallet -= packageCost;
+  await creator.save();
+
+  const node = new Node({ creator: creator._id, packageCost, participants: [] });
+  await node.save();
+  res.json(node);
+});
+
+// User joins node (amount is frozen)
+app.post('/nodes/:nodeId/join', async (req, res) => {
+  const { userId, minAmount } = req.body;
+  const node = await Node.findById(req.params.nodeId);
+  const user = await User.findById(userId);
+  if (!node || !user) return res.status(404).json({ error: 'Node or user not found' });
+  if (user.moniepointWallet < minAmount) return res.status(400).json({ error: 'Insufficient wallet balance' });
+
+  user.moniepointWallet -= minAmount;
+  user.frozenFunds += minAmount;
+  await user.save();
+
+  node.participants.push({ user: user._id, frozen: minAmount });
+  await node.save();
+
+  res.json({ message: 'Joined node, funds frozen', node });
+});
+
+  
