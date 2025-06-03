@@ -106,6 +106,7 @@ const authString = Buffer.from(`${apiKey}:${clientSecret}`).toString('base64');
 
 // Add the header to your request
 
+  
 
 app.post('/api/monnify', async (req, res) => {
  //   const freshAccounts = new Account(req.body);
@@ -119,8 +120,8 @@ app.post('/api/monnify', async (req, res) => {
          bvn,
          bvnDateOfBirth,
      },
-     customerEmail,
-     accountNumber:'8588872723'
+     customerEmail
+      
  };
  const headers = {
      Authorization: `Basic ${authString}`,
@@ -132,7 +133,12 @@ app.post('/api/monnify', async (req, res) => {
         const data = await action.json();
         const result = res.json(data);
  
-     console.log(result);
+     res.status(201).json({
+
+            accountnumber: data.accountNumber,
+            accountname: data.accountName,
+            message: 'Fiat wallet created successfully',
+        });
     
     } catch (error) {
         res.status(500).send(error.toString());
@@ -324,4 +330,20 @@ app.post('/nodes/:nodeId/join', async (req, res) => {
   res.json({ message: 'Joined node, funds frozen', node });
 });
 
+const matcherSchema = new mongoose.Schema({
   
+  phoneNum: Number,
+  walletAddress: String,
+ 
+});
+const Match = mongoose.model('matchList', matcherSchema);
+ 
+
+  app.post('/matchlist', async (req, res) => {
+  const matcher = new  Match(req.body);
+ const matched = await matcher.save();
+    res.status(201).json({
+            message: 'match created successfully',
+        });
+  
+});
