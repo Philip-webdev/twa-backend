@@ -135,8 +135,8 @@ app.post('/api/monnify', async (req, res) => {
  
      res.status(201).json({
 
-            accountnumber: data.accountNumber,
-            accountname: data.accountName,
+            accountnumber: data.responseBody.accountNumber,
+            accountname: data.responseBody.accountName,
             message: 'Fiat wallet created successfully',
         });
     
