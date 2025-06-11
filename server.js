@@ -112,7 +112,7 @@ const authString = Buffer.from(`${apiKey}:${clientSecret}`).toString('base64');
   
 
 app.post('/api/monnify', async (req, res) => {
- //   const freshAccounts = new Account(req.body);
+ 
  const { walletReference, walletName, customerName, bvn, bvnDateOfBirth, customerEmail} = req.body;
 
  const requestBody = {
@@ -134,15 +134,8 @@ app.post('/api/monnify', async (req, res) => {
     try {
         const action = await fetch(url, requestBody, {headers} );
         const data = await action.json();
-        const result = res.json(data);
- 
-     res.status(201).json({
-
-            accountnumber: data.responseBody.accountNumber,
-            accountname: data.responseBody.accountName,
-            message: 'Fiat wallet created successfully',
-        });
-    
+           res.json(data);
+  
     } catch (error) {
         res.status(500).send(error.toString());
     }
