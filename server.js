@@ -5,6 +5,7 @@ const session = require('express-session');
 const bcrypt = require('bcrypt');
 const MongoStore = require('connect-mongo');
 const axios = require('axios');
+const fetch = (...args) => import('node-fetch').then(({default: fetch}) => fetch(...args));
 const mongoose = require('mongoose');
 const Profile = require('./models/profiling');
 const Account = require('./models/Accounts');
@@ -129,11 +130,15 @@ app.post('/api/monnify', async (req, res) => {
  const headers = {
      Authorization: `Basic ${authString}`,
      'Content-Type': 'application/json',
-     'Access-Control-Allow-Origin': '*'
+     'Access-Control-Allow-Origin': 'https://app.nekstpei.com'
  };
     const url = `https://sandbox.monnify.com/api/v1/disbursements/wallet`;
     try {
-        const action = await fetch(url, requestBody, {headers} );
+        const action = await fetch(url, {
+            method: 'POST',
+            headers,
+            body: JSON.stringify(requestBody)
+        });
         const data = await action.json();
            res.json(data);
   
