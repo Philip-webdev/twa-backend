@@ -128,7 +128,8 @@ app.post('/api/monnify', async (req, res) => {
  };
  const headers = {
      Authorization: `Basic ${authString}`,
-     'Content-Type': 'application/json'
+     'Content-Type': 'application/json',
+     'Access-Control-Allow-Origin': '*'
  };
     const url = `https://sandbox.monnify.com/api/v1/disbursements/wallet`;
     try {
