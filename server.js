@@ -23,11 +23,6 @@ mongoose.connect(dbURI, {
     .catch((err) => {
         console.error('Database connection error:', err);
     });
-    app.use((req, res, next) => {
-        res.header("Access-Control-Allow-Credentials", "true");
-  
-        next();
-    });
 const corsOptions = {
     origin: [
         'https://app.nekstpei.com',
@@ -39,7 +34,7 @@ const corsOptions = {
     ],
     methods: ['GET', 'POST', 'PUT', 'DELETE', 'PATCH'],
     credentials: true,
-    allowedHeaders: ['Content-Type', 'Authorization', 'Access-Control-Allow-Origin'  ],
+    allowedHeaders: ['Content-Type', 'Authorization', 'Access-Control-Allow-Origin',"Access-Control-Allow-Credentials"  ],
 };
 
 app.use(express.json()); 
