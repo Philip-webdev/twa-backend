@@ -274,7 +274,8 @@ const userSchema = new mongoose.Schema({
   
   phone: String,
   moniepointWallet: { type: Number },
-  frozenFunds: { type: Number }
+  plan: String
+ 
 });
 const User = mongoose.model('User', userSchema);
 
@@ -303,7 +304,7 @@ app.post('/users', async (req, res) => {
 app.post('/nodes', async (req, res) => {
   const { creatorId, packageCost } = req.body;
   const creator = await User.findById(creatorId);
-  if (!creator || creator.moniepointWallet < ( packageCost / 5) ) {
+  if (!creator || creator.moniepointWallet < ( packageCost ) ) {
     return res.status(400).json({ error: 'Insufficient funds or user not found' });
   }
   creator.moniepointWallet -= packageCost;
@@ -323,7 +324,7 @@ app.post('/nodes/:nodeId/join', async (req, res) => {
   if (user.moniepointWallet < minAmount) return res.status(400).json({ error: 'Insufficient wallet balance' });
 
   user.moniepointWallet -= minAmount;
-  user.frozenFunds += minAmount;
+
   await user.save();
 
   node.participants.push({ user: user._id, frozen: minAmount });
