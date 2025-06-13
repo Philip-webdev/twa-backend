@@ -274,8 +274,9 @@ const userSchema = new mongoose.Schema({
   
   phone: String,
   moniepointWallet: { type: Number },
-  plan: String
- 
+  plan: { type: Number },
+  network: String
+
 });
 const User = mongoose.model('User', userSchema);
 
