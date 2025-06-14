@@ -267,7 +267,26 @@ app.post('/wallets', async (req, res) => {
             res.status(500).json({ error: 'Internal Server Error' });
         }
     });
+const CryptofundSchema = new mongoose.Schema({
+  
+  news: {
+    type: Object,
+    title: String,
+    content: String,
+  },
+});
+const Cryptofund = mongoose.model('Cryptofund', CryptofundSchema);
 
+    
+          app.get('/cryptofund',  async (req, res) => {
+            try {
+                const news = await Cryptofund.find().select('news');  
+                res.json(news);
+            } catch (error) {
+                console.error('Error fetching cryptofund:', error);
+                res.status(500).json({ error: 'Internal Server Error' });
+            }
+        });
   
 // User schema
 const userSchema = new mongoose.Schema({
