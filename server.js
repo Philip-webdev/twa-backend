@@ -30,7 +30,7 @@ const corsOptions = {
         'https://nexr-pi.vercel.app',
         'https://philip-webdev.github.io',
         'https://sandbox.monnify.com',
-        'http://localhost:5173',
+        'http://localhost:5173', 'http://github.com',
         'https://nekstpei.com'
     ],
     methods: ['GET', 'POST', 'PUT', 'DELETE', 'PATCH'],
