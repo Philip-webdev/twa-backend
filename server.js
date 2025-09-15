@@ -10,6 +10,7 @@ const mongoose = require('mongoose');
 const Profile = require('./models/profiling');
 const Account = require('./models/Accounts');
 const app = express();
+app.disable('x-powered-by');
 const port = process.env.PORT || 1000;
 const dbURI = 'mongodb+srv://philisobank21:twa123@cluster1.cege3.mongodb.net/?retryWrites=true&w=majority&appName=Cluster1';
 mongoose.connect(dbURI, {
